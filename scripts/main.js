@@ -31,14 +31,7 @@ const attachEventListeners = () => {
     document.querySelector("#purchase").addEventListener("click", purchaseMeal)
 }
  
-const getPrices = async () => {
-    const entrees = await fetch("http://localhost:8088/entrees").then(res => res.json())
-    const vegetables = await fetch("http://localhost:8088/vegetables").then(res => res.json())
-    const sides = await fetch("http://localhost:8088/sides").then(res => res.json())
- 
-    return { entrees, vegetables, sides }
-}
- 
+
 const purchaseMeal = async () => {
     //check if all selections are made
     if (!isComplete()) {
@@ -46,7 +39,9 @@ const purchaseMeal = async () => {
     }
  
     //get prices for selected items
-    const { entrees, vegetables, sides } = await getPrices()
+    const entrees = await fetch("http://localhost:8088/entrees").then(res => res.json())
+    const vegetables = await fetch("http://localhost:8088/vegetables").then(res => res.json())
+    const sides = await fetch("http://localhost:8088/sides").then(res => res.json())
  
     const entreePrice = entrees.find(entree => entree.id == transientState.entree).price
     const veggiePrice = vegetables.find(vegetable => vegetable.id == transientState.vegetable).price
