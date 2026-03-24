@@ -37,9 +37,12 @@ const purchaseMeal = async () => {
     }
  
     //get prices for selected items
-    const entrees = await fetch("http://localhost:8088/entrees").then(res => res.json())
-    const vegetables = await fetch("http://localhost:8088/vegetables").then(res => res.json())
-    const sides = await fetch("http://localhost:8088/sides").then(res => res.json())
+    const entreesResponse = await fetch("http://localhost:8088/entrees")
+    const entrees = await entreesResponse.json()
+    const vegetablesResponse = await fetch("http://localhost:8088/vegetables")
+    const vegetables = await vegetablesResponse.json()
+    const sidesResponse = await fetch("http://localhost:8088/sides")
+    const sides = await sidesResponse.json()
  
     const entreePrice = entrees.find(entree => entree.id == transientState.entree).price
     const veggiePrice = vegetables.find(vegetable => vegetable.id == transientState.vegetable).price
