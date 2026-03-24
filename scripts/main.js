@@ -4,11 +4,9 @@ import { transientState, clearTransientState, isComplete } from "./TransientStat
 const mainContainer = document.querySelector("#container")
  
 const renderAllHTML = async () => {
+
     mainContainer.innerHTML = await FoodTruck()
-    attachEventListeners()
-}
- 
-const attachEventListeners = () => {
+
     document.querySelectorAll('input[name="entree"]').forEach(radio => {
         radio.addEventListener("change", (event) => {
             transientState.entree = event.target.value
@@ -30,7 +28,7 @@ const attachEventListeners = () => {
     //purchase button
     document.querySelector("#purchase").addEventListener("click", purchaseMeal)
 }
- 
+
 
 const purchaseMeal = async () => {
     //check if all selections are made
@@ -66,10 +64,10 @@ const purchaseMeal = async () => {
         body: JSON.stringify(newPurchase)
     })
  
-    //reset transient state
+
     clearTransientState()
  
-    //re-render
+
     await renderAllHTML()
 }
  
